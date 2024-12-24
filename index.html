@@ -28,7 +28,7 @@
     <script>
         // Function to send a ping request to the Python server
         function sendPing() {
-            fetch('http://212.87.136.194:5656/ping')  // Assuming server is running on localhost:5000
+            fetch('//7.tcp.eu.ngrok.io:17668/ping')  // Assuming server is running on localhost:5000
                 .then(response => response.json())
                 .then(data => {
                     const logDiv = document.getElementById('ping-log');
