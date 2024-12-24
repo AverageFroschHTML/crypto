@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ping Client</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #ping-log {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        .ping-entry {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ping Client</h1>
+    <p>This page sends ping requests to a Python server every 3 seconds and displays the results.</p>
+
+    <div id="ping-log"></div>
+
+    <script>
+        // Function to send a ping request to the Python server
+        function sendPing() {
+            fetch('http://212.87.136.194:5656/ping')  // Assuming server is running on localhost:5000
+                .then(response => response.json())
+                .then(data => {
+                    const logDiv = document.getElementById('ping-log');
+                    const newPing = document.createElement('div');
+                    newPing.className = 'ping-entry';
+                    newPing.textContent = `Ping received at ${new Date(data.timestamp * 1000).toLocaleTimeString()} - Status: ${data.status}`;
+                    logDiv.appendChild(newPing);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Send ping every 3 seconds
+        setInterval(sendPing, 3000);
+    </script>
+</body>
+</html>
